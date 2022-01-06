@@ -1,0 +1,21 @@
+name: PR Checks on PR Create
+
+on:
+  pull_request: 
+    branches: [main]
+    types: [opened]
+
+jobs: 
+ 
+  do-this-when-pr-created:
+    if: ${{ github.event_name == 'pull_request'}}
+    name: Do this when PR created
+    runs-on: ubuntu-latest
+    steps:        
+        - name: Checkout
+          uses: actions/checkout@v2.4.0   
+        - name: Run this only when PR is created
+          env:
+             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          run: |
+            echo "This workflow ran when PR was created!"
